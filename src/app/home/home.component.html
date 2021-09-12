@@ -1,0 +1,25 @@
+<section class="search-container">
+  <h1>Search for a book</h1>
+  <div class="d-flex-align--center search-content">
+    <input type="text" (keydown.enter)="searchBooks(searchBook.value)" #searchBook>
+    <button class="btn" (click)="searchBooks(searchBook.value)">Search</button>
+  </div>
+</section>
+
+<section class="list">
+  <div class="d-flex-align--center book-card" *ngFor="let book of booksList">
+    <div class="d-flex-column book-info">
+      <div class="title">{{book.volumeInfo.title}}</div>
+
+      <div class="description"
+           *ngIf="book.volumeInfo.description; else noDescription">{{book.volumeInfo.description}}</div>
+
+      <ng-template #noDescription>
+        <div class="description">The book has no description</div>
+      </ng-template>
+    </div>
+    <div class="img book-image">
+      <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="">
+    </div>
+  </div>
+</section>
